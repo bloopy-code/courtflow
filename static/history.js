@@ -1,5 +1,23 @@
 const matchHistory = [];
 
+function getCompletedMatchesByMode(mode) {
+    return matchHistory.filter(match => match.mode === mode);
+}
+
+function getAverageDurationSeconds(mode) {
+    const matches = getCompletedMatchesByMode(mode);
+
+    if (matches.length === 0) {
+        return null;
+    }
+
+    const totalSeconds = matches.reduce((total, match) => {
+        return total + match.durationSeconds;
+    }, 0);
+
+    return Math.round(totalSeconds / matches.length);
+}
+
 function updateMatchHistoryPanel() {
     const panel = document.getElementById("match-history-panel");
 
@@ -64,6 +82,13 @@ function logCompletedMatch(courtCard, durationSeconds) {
         recordPartnerPair(teamB[0], teamB[1]);
     }
 
+    teamA.forEach(playerA => {
+    teamB.forEach(playerB => {
+        recordOpponentPair(playerA, playerB);
+        });
+    });
+
     console.log("Match history:", matchHistory);
     console.log("Partner counts:", partnerCounts);
+    console.log("Opponent counts:", opponentCounts);
 }

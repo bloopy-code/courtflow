@@ -1,21 +1,52 @@
-function assignPlayersToCourt(courtCard, selectedPlayers) {
+// function assignPlayersToCourt(courtCard, selectedPlayers) {
+//     const teamA = courtCard.querySelector(".team-a");
+//     const teamB = courtCard.querySelector(".team-b");
+
+//     selectedPlayers.forEach(player => {
+//         player.dataset.status = "playing";
+//         updatePlayerDisplay(player);
+//     });
+
+//     if (getCourtMode(courtCard) === "singles") {
+//         teamA.appendChild(selectedPlayers[0]);
+//         teamB.appendChild(selectedPlayers[1]);
+//     } else {
+//         const bestTeams = chooseBestDoublesTeams(selectedPlayers);
+
+//         bestTeams[0].forEach(player => teamA.appendChild(player));
+//         bestTeams[1].forEach(player => teamB.appendChild(player));
+//     }
+
+//     updateCourtReadyState(courtCard);
+// }
+function sendMatchToCourt(courtCard, suggestion) {
+    if (!suggestion) return;
+
+    courtCard.dataset.mode = suggestion.mode;
+
+    const modeButtons = courtCard.querySelectorAll(".court-mode-btn");
+
+    modeButtons.forEach(button => {
+        button.classList.toggle(
+            "active",
+            button.dataset.mode === suggestion.mode
+        );
+    });
+
     const teamA = courtCard.querySelector(".team-a");
     const teamB = courtCard.querySelector(".team-b");
 
-    selectedPlayers.forEach(player => {
+    suggestion.teamA.forEach(player => {
         player.dataset.status = "playing";
         updatePlayerDisplay(player);
+        teamA.appendChild(player);
     });
 
-    if (getCourtMode(courtCard) === "singles") {
-        teamA.appendChild(selectedPlayers[0]);
-        teamB.appendChild(selectedPlayers[1]);
-    } else {
-        const bestTeams = chooseBestDoublesTeams(selectedPlayers);
-
-        bestTeams[0].forEach(player => teamA.appendChild(player));
-        bestTeams[1].forEach(player => teamB.appendChild(player));
-    }
+    suggestion.teamB.forEach(player => {
+        player.dataset.status = "playing";
+        updatePlayerDisplay(player);
+        teamB.appendChild(player);
+    });
 
     updateCourtReadyState(courtCard);
 }
@@ -126,25 +157,33 @@ document.querySelectorAll(".court-card").forEach(courtCard => {
             return;
         }
 
-        const availablePlayers = Array.from(
-            playerPool.querySelectorAll(".player")
-        ).filter(player => player.dataset.type !== "coach");
+        // const availablePlayers = Array.from(
+        //     playerPool.querySelectorAll(".player")
+        // ).filter(player => player.dataset.type !== "coach");
 
-        if (availablePlayers.length < maxPlayersPerCourt(courtCard)) {
+        // if (availablePlayers.length < maxPlayersPerCourt(courtCard)) {
+        //     alert("Not enough players in the pool");
+        //     return;
+        // }
+
+        // availablePlayers.sort(
+        //     (a, b) => playerPriorityScore(a) - playerPriorityScore(b)
+        // );
+
+        // const selectedPlayers = availablePlayers.slice(
+        //     0,
+        //     maxPlayersPerCourt(courtCard)
+        // );
+
+        // assignPlayersToCourt(courtCard, selectedPlayers);
+        const suggestion = buildMatchSuggestion(getCourtMode(courtCard));
+
+        if (!suggestion) {
             alert("Not enough players in the pool");
             return;
         }
 
-        availablePlayers.sort(
-            (a, b) => playerPriorityScore(a) - playerPriorityScore(b)
-        );
-
-        const selectedPlayers = availablePlayers.slice(
-            0,
-            maxPlayersPerCourt(courtCard)
-        );
-
-        assignPlayersToCourt(courtCard, selectedPlayers);
+        sendMatchToCourt(courtCard, suggestion);
     });
 
     clearButton.addEventListener("click", function () {

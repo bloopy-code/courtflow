@@ -161,6 +161,7 @@ button {
     justify-content: center;
     flex-wrap: wrap;
     gap: 8px;
+    min-width: 110px;
 }
 
 .court-half p {
@@ -306,6 +307,9 @@ button {
     margin: 0;
 }
 
+.remove-player-btn:hover {
+    background: #ffaaaa;
+}
 .remove-player-btn:hover {
     background: #ffaaaa;
 }

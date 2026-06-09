@@ -1,3 +1,55 @@
+// function sendSuggestionToCourt(courtNumber) {
+//     if (!currentSuggestion) return;
+
+//     const courtCards = Array.from(document.querySelectorAll(".court-card"));
+//     const courtCard = courtCards[courtNumber - 1];
+
+//     if (!courtCard) return;
+
+//     if (courtCard.classList.contains("disabled")) {
+//         alert("Court is disabled");
+//         return;
+//     }
+
+//     if (courtCard.classList.contains("playing")) {
+//         alert("Game is already running on that court");
+//         return;
+//     }
+
+//     if (getCourtPlayers(courtCard).length > 0) {
+//         alert("Court already has players on it");
+//         return;
+//     }
+
+//     courtCard.dataset.mode = currentSuggestion.mode;
+
+//     const modeButtons = courtCard.querySelectorAll(".court-mode-btn");
+
+//     modeButtons.forEach(button => {
+//         button.classList.toggle(
+//             "active",
+//             button.dataset.mode === currentSuggestion.mode
+//         );
+//     });
+
+//     const teamA = courtCard.querySelector(".team-a");
+//     const teamB = courtCard.querySelector(".team-b");
+
+//     currentSuggestion.teamA.forEach(player => {
+//         player.dataset.status = "playing";
+//         updatePlayerDisplay(player);
+//         teamA.appendChild(player);
+//     });
+
+//     currentSuggestion.teamB.forEach(player => {
+//         player.dataset.status = "playing";
+//         updatePlayerDisplay(player);
+//         teamB.appendChild(player);
+//     });
+
+//     updateCourtReadyState(courtCard);
+//     clearSuggestedMatch();
+// }
 function sendSuggestionToCourt(courtNumber) {
     if (!currentSuggestion) return;
 
@@ -21,33 +73,7 @@ function sendSuggestionToCourt(courtNumber) {
         return;
     }
 
-    courtCard.dataset.mode = currentSuggestion.mode;
-
-    const modeButtons = courtCard.querySelectorAll(".court-mode-btn");
-
-    modeButtons.forEach(button => {
-        button.classList.toggle(
-            "active",
-            button.dataset.mode === currentSuggestion.mode
-        );
-    });
-
-    const teamA = courtCard.querySelector(".team-a");
-    const teamB = courtCard.querySelector(".team-b");
-
-    currentSuggestion.teamA.forEach(player => {
-        player.dataset.status = "playing";
-        updatePlayerDisplay(player);
-        teamA.appendChild(player);
-    });
-
-    currentSuggestion.teamB.forEach(player => {
-        player.dataset.status = "playing";
-        updatePlayerDisplay(player);
-        teamB.appendChild(player);
-    });
-
-    updateCourtReadyState(courtCard);
+    sendMatchToCourt(courtCard, currentSuggestion);
     clearSuggestedMatch();
 }
 

@@ -1,5 +1,31 @@
 const partnerCounts = new Map();
 let currentSuggestion = null;
+const opponentCounts = new Map();
+
+function getOpponentKey(playerA, playerB) {
+    return [getPlayerName(playerA), getPlayerName(playerB)].sort().join(" vs ");
+}
+
+function getOpponentCount(playerA, playerB) {
+    return opponentCounts.get(getOpponentKey(playerA, playerB)) || 0;
+}
+
+function recordOpponentPair(playerA, playerB) {
+    const key = getOpponentKey(playerA, playerB);
+    opponentCounts.set(key, getOpponentCount(playerA, playerB) + 1);
+}
+
+function getTeamOpponentScore(teamA, teamB) {
+    let score = 0;
+
+    teamA.forEach(playerA => {
+        teamB.forEach(playerB => {
+            score += getOpponentCount(playerA, playerB);
+        });
+    });
+
+    return score;
+}
 
 function getPairKey(playerA, playerB) {
     return [getPlayerName(playerA), getPlayerName(playerB)].sort().join(" + ");
@@ -24,21 +50,25 @@ function chooseBestDoublesTeams(selectedPlayers) {
     ];
 
     options.sort((optionA, optionB) => {
-        const scoreA =
+        const partnerScoreA =
             getPartnerCount(optionA[0][0], optionA[0][1]) +
             getPartnerCount(optionA[1][0], optionA[1][1]);
 
-        const scoreB =
+        const partnerScoreB =
             getPartnerCount(optionB[0][0], optionB[0][1]) +
             getPartnerCount(optionB[1][0], optionB[1][1]);
 
-        return scoreA - scoreB;
+        const opponentScoreA = getTeamOpponentScore(optionA[0], optionA[1]);
+        const opponentScoreB = getTeamOpponentScore(optionB[0], optionB[1]);
+
+        return (partnerScoreA * 10 + opponentScoreA) -
+               (partnerScoreB * 10 + opponentScoreB);
     });
 
     return options[0];
 }
 
-function suggestNextMatch(mode) {
+function buildMatchSuggestion(mode) {
     const neededPlayers = mode === "singles" ? 2 : 4;
 
     const availablePlayers = Array.from(
@@ -75,6 +105,10 @@ function suggestNextMatch(mode) {
         teamA: bestTeams[0],
         teamB: bestTeams[1]
     };
+}
+
+function suggestNextMatch(mode) {
+    return buildMatchSuggestion(mode);
 }
 
 function updateSuggestedMatchPanel(suggestion) {
