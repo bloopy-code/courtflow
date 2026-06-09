@@ -28,7 +28,18 @@ function updateMatchHistoryPanel() {
         return;
     }
 
-    panel.innerHTML = "";
+    const averageDoubles = getAverageDurationSeconds("doubles");
+    const averageSingles = getAverageDurationSeconds("singles");
+
+    panel.innerHTML = `
+        <div class="match-average-card">
+            <strong>Averages</strong>
+            <br>
+            Doubles: ${averageDoubles ? formatTime(averageDoubles) : "—"}
+            <br>
+            Singles: ${averageSingles ? formatTime(averageSingles) : "—"}
+        </div>
+    `;
 
     matchHistory.slice().reverse().forEach(match => {
         const item = document.createElement("div");
@@ -83,8 +94,8 @@ function logCompletedMatch(courtCard, durationSeconds) {
     }
 
     teamA.forEach(playerA => {
-    teamB.forEach(playerB => {
-        recordOpponentPair(playerA, playerB);
+        teamB.forEach(playerB => {
+            recordOpponentPair(playerA, playerB);
         });
     });
 

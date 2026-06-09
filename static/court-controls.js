@@ -76,8 +76,9 @@ function resetCourt(courtCard, shouldLogMatch = false) {
 
     courtCard.classList.remove("playing");
     courtCard.classList.remove("ready");
+    courtCard.classList.remove("approaching-average");
     dropzone.classList.remove("full");
-
+    
     startStopButton.textContent = "Start Game";
 
     if (timerDisplay) {

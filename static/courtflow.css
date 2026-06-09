@@ -313,3 +313,21 @@ button {
 .remove-player-btn:hover {
     background: #ffaaaa;
 }
+
+/* .court-card.approaching-average {
+    background: #ffd89b;
+    border-color: #ff9800;
+} */
+
+.court-card.approaching-average .timer-display {
+    color: #b85c00;
+    font-weight: bold;
+}
+
+.match-average-card {
+    background: #fff3cd;
+    border: 2px solid #cc9900;
+    padding: 8px;
+    margin-bottom: 8px;
+    font-size: 12px;
+}
