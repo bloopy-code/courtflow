@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>CourtFlow</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='courtflow.css') }}">
+    <link rel="stylesheet" href="static/courtflow.css">
 </head>
 
 <body>
@@ -49,7 +49,7 @@
             </div>
 
             <div id="player-pool">
-                {% for player in players %}
+                <!-- {% for player in players %}
                     {% set bits = player.name.split() %}
                     {% set label = bits[0] ~ " " ~ bits[-1][:2] %}
 
@@ -74,7 +74,7 @@
                         </button>
                     </div>
                     
-                {% endfor %}
+                {% endfor %} -->
             </div>
 
             <h2>Suggested Next Match</h2>
@@ -105,7 +105,96 @@
             </div>
 
             <div class="courts">
-                {% for court in courts %}
+                <div class="courts">
+    <div class="court-card">
+        <h2>Court 1</h2>
+        <p class="timer-display">00:00</p>
+
+        <div class="court-dropzone">
+            <div class="court-half team-a"><p>Team A</p></div>
+            <div class="court-half team-b"><p>Team B</p></div>
+        </div>
+
+        <div class="court-mode">
+            <button class="court-mode-btn active" data-mode="doubles">Doubles</button>
+            <button class="court-mode-btn" data-mode="singles">Singles</button>
+        </div>
+
+        <div class="buttons">
+            <button class="start-stop-btn">Start Game</button>
+            <button class="assign-btn">Auto Assign</button>
+            <button class="clear-btn">Clear Court</button>
+            <button class="disable-btn">Disable Court</button>
+        </div>
+    </div>
+
+    <div class="court-card">
+        <h2>Court 2</h2>
+        <p class="timer-display">00:00</p>
+
+        <div class="court-dropzone">
+            <div class="court-half team-a"><p>Team A</p></div>
+            <div class="court-half team-b"><p>Team B</p></div>
+        </div>
+
+        <div class="court-mode">
+            <button class="court-mode-btn active" data-mode="doubles">Doubles</button>
+            <button class="court-mode-btn" data-mode="singles">Singles</button>
+        </div>
+
+        <div class="buttons">
+            <button class="start-stop-btn">Start Game</button>
+            <button class="assign-btn">Auto Assign</button>
+            <button class="clear-btn">Clear Court</button>
+            <button class="disable-btn">Disable Court</button>
+        </div>
+    </div>
+
+    <div class="court-card">
+        <h2>Court 3</h2>
+        <p class="timer-display">00:00</p>
+
+        <div class="court-dropzone">
+            <div class="court-half team-a"><p>Team A</p></div>
+            <div class="court-half team-b"><p>Team B</p></div>
+        </div>
+
+        <div class="court-mode">
+            <button class="court-mode-btn active" data-mode="doubles">Doubles</button>
+            <button class="court-mode-btn" data-mode="singles">Singles</button>
+        </div>
+
+        <div class="buttons">
+            <button class="start-stop-btn">Start Game</button>
+            <button class="assign-btn">Auto Assign</button>
+            <button class="clear-btn">Clear Court</button>
+            <button class="disable-btn">Disable Court</button>
+        </div>
+    </div>
+
+    <div class="court-card">
+        <h2>Court 4</h2>
+        <p class="timer-display">00:00</p>
+
+        <div class="court-dropzone">
+            <div class="court-half team-a"><p>Team A</p></div>
+            <div class="court-half team-b"><p>Team B</p></div>
+        </div>
+
+        <div class="court-mode">
+            <button class="court-mode-btn active" data-mode="doubles">Doubles</button>
+            <button class="court-mode-btn" data-mode="singles">Singles</button>
+        </div>
+
+        <div class="buttons">
+            <button class="start-stop-btn">Start Game</button>
+            <button class="assign-btn">Auto Assign</button>
+            <button class="clear-btn">Clear Court</button>
+            <button class="disable-btn">Disable Court</button>
+        </div>
+    </div>
+</div>
+                <!-- {% for court in courts %}
                     <div class="court-card">
                         <h2>Court {{ court }}</h2>
                         <p class="timer-display">00:00</p>
@@ -131,12 +220,23 @@
                             <button class="disable-btn">Disable Court</button>
                         </div>
                     </div>
-                {% endfor %}
+                {% endfor %} -->
             </div>
         </main>
 
     </div>
-<script src="{{ url_for('static', filename='session.js') }}"></script>
+    <script src="static/session.js"></script>
+<script src="static/history.js"></script>
+<script src="static/timers.js"></script>
+<script src="static/players.js"></script>
+<script src="static/courts.js"></script>
+<script src="static/matching.js"></script>
+<script src="static/court-controls.js"></script>
+<script src="static/suggestions.js"></script>
+<script src="static/dragdrop.js"></script>
+<script src="static/player-controls.js"></script>
+<script src="static/session-loader.js"></script>
+<!-- <script src="{{ url_for('static', filename='session.js') }}"></script>
 <script src="{{ url_for('static', filename='history.js') }}"></script>
 <script src="{{ url_for('static', filename='timers.js') }}"></script>
 <script src="{{ url_for('static', filename='players.js') }}"></script>
@@ -145,6 +245,6 @@
 <script src="{{ url_for('static', filename='court-controls.js') }}"></script>
 <script src="{{ url_for('static', filename='suggestions.js') }}"></script>
 <script src="{{ url_for('static', filename='dragdrop.js') }}"></script>
-<script src="{{ url_for('static', filename='player-controls.js') }}"></script>
+<script src="{{ url_for('static', filename='player-controls.js') }}"></script> -->
 </body>
 </html>

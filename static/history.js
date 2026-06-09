@@ -35,9 +35,9 @@ function updateMatchHistoryPanel() {
         <div class="match-average-card">
             <strong>Averages</strong>
             <br>
-            Doubles: ${averageDoubles ? formatTime(averageDoubles) : "—"}
+            Doubles: ${averageDoubles ? formatTime(averageDoubles) : ""}
             <br>
-            Singles: ${averageSingles ? formatTime(averageSingles) : "—"}
+            Singles: ${averageSingles ? formatTime(averageSingles) : ""}
         </div>
     `;
 
@@ -46,8 +46,7 @@ function updateMatchHistoryPanel() {
         item.classList.add("match-history-item");
 
         item.innerHTML = `
-            <strong>${match.mode}</strong> — ${formatTime(match.durationSeconds)}
-            <br>
+<strong>${match.mode}</strong> - ${formatTime(match.durationSeconds)}            <br>
             ${match.teamA.join(" + ")}
             <br>
             vs

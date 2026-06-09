@@ -83,12 +83,12 @@ function createPlayerCard(name, type = "player") {
     player.dataset.waitingSince = sessionStarted ? Date.now() : "";
 
     player.innerHTML = `
-        <button class="remove-player-btn" title="Remove player">×</button>
         <div class="player-label">${makePlayerLabel(name)}</div>
         ${type === "coach" ? `<div class="coach-label">coach</div>` : ""}
         <div class="player-stats">
             <div class="player-stat matches-stat">G: 0</div>
             <div class="player-stat waiting-stat">00:00</div>
+            <button class="remove-player-btn" title="Remove player">x</button>
         </div>
     `;
 

@@ -3,22 +3,22 @@ let sessionEnded = false;
 let sessionStartTime = null;
 let playerDisplayInterval = null;
 
-const sessionSelect = document.getElementById("session-select");
+// const sessionSelect = document.getElementById("session-select");
 const startSessionButton = document.getElementById("start-session-btn");
 const endSessionButton = document.getElementById("end-session-btn");
 
-if (sessionSelect) {
-    sessionSelect.addEventListener("change", function () {
-        const session = sessionSelect.value;
+// if (sessionSelect) {
+//     sessionSelect.addEventListener("change", function () {
+//         const session = sessionSelect.value;
 
-        if (!session) {
-            window.location.href = "/play";
-            return;
-        }
+//         if (!session) {
+//             window.location.href = "/play";
+//             return;
+//         }
 
-        window.location.href = `/play?session=${session}`;
-    });
-}
+//         // window.location.href = `/play?session=${session}`;
+//     });
+// }
 
 if (startSessionButton) {
     startSessionButton.addEventListener("click", function () {
