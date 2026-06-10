@@ -12,6 +12,13 @@ function startTimer(courtCard) {
 
     courtCard.dataset.startTime = Date.now();
 
+    const mode = getCourtMode(courtCard);
+
+    const averageDuration = getAverageDurationSeconds(mode);
+
+    courtCard.dataset.expectedDuration =
+        averageDuration || "";
+
     const timerId = setInterval(function () {
         const elapsedSeconds = Math.floor(
             (Date.now() - Number(courtCard.dataset.startTime)) / 1000
@@ -19,13 +26,13 @@ function startTimer(courtCard) {
 
         timerDisplay.textContent = formatTime(elapsedSeconds);
 
-        // Check average duration for this match type
-        const mode = getCourtMode(courtCard);
-        const averageDuration = getAverageDurationSeconds(mode);
+        const expectedDuration = Number(
+            courtCard.dataset.expectedDuration
+        );
 
         if (
-            averageDuration &&
-            elapsedSeconds >= averageDuration * 0.8
+            expectedDuration &&
+            elapsedSeconds >= expectedDuration * 0.8
         ) {
             courtCard.classList.add("approaching-average");
         }
@@ -53,6 +60,7 @@ function stopTimer(courtCard) {
     );
 
     courtCard.dataset.startTime = "";
+    courtCard.dataset.expectedDuration = "";
 
     return durationSeconds;
 }
